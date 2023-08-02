@@ -12,7 +12,7 @@ authentification = Blueprint('authentification', __name__)
 @authentification.route('/Login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        return redirect('/Login')
+        return render_template('index.html')
 
     username = request.form.get('username')
     password = request.form.get('password')
@@ -26,13 +26,13 @@ def login():
         flask_login.login_user(user)
         return redirect(url_for('api.hello'))
 
-    return render_template('login.html', canLogin="id またはパスワードが違います")
+    return render_template('index.html')
 
 
 @authentification.route('/Signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
-        return render_template('Signup.html')
+        return render_template('index.html')
 
     username = request.form.get('username')
     password = request.form.get('password')
@@ -40,22 +40,22 @@ def signup():
     credential = userCredential(username, password)
     fetchedUser = userCredentialAccessor.checkUserIs(credential)
     if len(fetchedUser) == 1:
-        return redirect(url_for('authentification/canSignup', canSignup=False))
+        return redirect(url_for('authentification.canSignup', canSignup=False))
 
     userCredentialAccessor.addUser(credential)
 
-    return redirect(url_for('authentification/canSignup', canSignup=True))
+    return redirect(url_for('authentification.canSignup', canSignup=True))
 
 
-@authentification.route('/canSignup/<canSignup>/', methods=['GET', 'POST'])
+@authentification.route('/CanSignup/<canSignup>/', methods=['GET', 'POST'])
 def canSignup(canSignup):
     if strtobool(canSignup):
-        return render_template('canSignup.html', msg="登録が完了しました。")
-    return render_template('canSignup.html', msg="入力された ユーザー名 は既に使われています")
+        return render_template('index.html')
+    return redirect('/authentification/Login')
 
 
 @authentification.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
     logout_user()
-    return render_template('login.html')
+    return redirect('/Login')

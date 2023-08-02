@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager
 from api import api
 from authentification import authentification
 from user import User
