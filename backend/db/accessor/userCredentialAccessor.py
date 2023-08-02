@@ -13,7 +13,7 @@ class userCredentialAccessor:
             cursor.execute('INSERT INTO User VALUES(?, ?, ?)', (userCredential.userName, userCredential.password, userCredential.updateDate))
     
     def checkUserIs(userCredential):
-        with sqlite3.connect('C:\\Users\\tonon\\work\\ranking_api\\Ranking_new\\backend\\app.db') as connection:
+        with sqlite3.connect('app.db') as connection:
             cursor = connection.cursor()
             cursor.execute('SELECT * FROM User WHERE UserName=? ', (userCredential.userName, ))
             return cursor.fetchall()
