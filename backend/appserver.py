@@ -29,5 +29,9 @@ appserver.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 def index(path):
     return render_template('index.html')
 
+@appserver.route('/sample', methods=['GET', 'POST'])
+def sample():
+    return render_template('index.html')
+
 if __name__ == "__main__":
     appserver.run(debug=True)

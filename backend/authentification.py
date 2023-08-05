@@ -1,5 +1,5 @@
 from distutils.util import strtobool
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, jsonify, redirect, render_template, request, url_for
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
 import flask_login
 from db.accessor.userCredentialAccessor import userCredentialAccessor
@@ -40,7 +40,7 @@ def signup():
     credential = userCredential(username, password)
     fetchedUser = userCredentialAccessor.checkUserIs(credential)
     if len(fetchedUser) == 1:
-        return redirect(url_for('authentification.canSignup', canSignup=False))
+        return jsonify({'canSignup': False})
 
     userCredentialAccessor.addUser(credential)
 
@@ -51,7 +51,7 @@ def signup():
 def canSignup(canSignup):
     if strtobool(canSignup):
         return render_template('index.html')
-    return redirect('/authentification/Login')
+    return redirect(url_for('authentification.signup'))
 
 
 @authentification.route('/logout', methods=['GET', 'POST'])
