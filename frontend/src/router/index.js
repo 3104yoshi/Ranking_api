@@ -5,6 +5,7 @@ import CanSignupView from "../views/CanSignupView.vue";
 import LoginView from "../views/LoginView.vue";
 import SignupView from "../views/SignupView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import AuthView from "../views/AuthView.vue";
 
 const routes = [
   {
@@ -15,19 +16,22 @@ const routes = [
   {
     path: "/sample",
     name: "sample",
-    // component: () => import(/* webpackChunkName: "sample" */ '../views/SampleView.vue')
     component: SampleView,
+  },
+  {
+    path: "/auth/:AuthType",
+    name: "auth",
+    component: AuthView,
+    props : (route) => ({ AuthType: route.params.AuthType }),
   },
   {
     path: "/authentification/login",
     name: "Login",
-    // component: () => import(/* webpackChunkName: "sample" */ '../views/SampleView.vue')
     component: LoginView,
   },
   {
     path: "/authentification/signup",
     name: "Signup",
-    // component: () => import(/* webpackChunkName: "sample" */ '../views/SampleView.vue')
     component: SignupView,
   },
   {

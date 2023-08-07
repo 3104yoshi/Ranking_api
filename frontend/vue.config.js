@@ -5,5 +5,8 @@ module.exports = defineConfig({
   devServer: {
     proxy: 'http://localhost:5000'
   },
-  transpileDependencies: true
+  transpileDependencies: true,
+  configureWebpack: {
+    devtool: 'source-map'
+  }
 })

@@ -1,9 +1,11 @@
 <template>
-  <ul class="tab-menu">
-    <li><router-link to="authentification/Login">Login</router-link></li>
-    <li><router-link to="authentification/Signup">Signup</router-link></li>
-  </ul>
-  <router-view/>
+  <div>
+    <ul class="tab-menu">
+      <li><router-link v-bind:to="{ name : 'auth', params : { AuthType : 'Login' } }">Login</router-link></li>
+      <li><router-link v-bind:to="{ name : 'auth', params : { AuthType : 'Signup' } }">Signup</router-link></li>
+    </ul>
+    <router-view/>
+  </div>
 </template>
 
 <style>

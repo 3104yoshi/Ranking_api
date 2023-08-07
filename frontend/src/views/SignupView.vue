@@ -11,7 +11,10 @@
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
 
-      <input type="submit" value="Sign up" id="login">
+      <input type="submit" value="Sign up" id="signup">
+    </form>
+    <form action="/auth/Login" method="GET" >
+      <input type="submit" value="Loginへ" id="auth-login">
     </form>
   </div>
 </template>
@@ -63,12 +66,13 @@ body {
     margin: 20px;
   }
 
-  #login {
-    background-color: #4CAF50;
+  #auth-login {
+    background-color: white;
+    color: #823df2;
   }
 
   #signup {
-    background-color: #f59dfd;
+    background-color: #823df2;
   }
 
   .canLogin {
