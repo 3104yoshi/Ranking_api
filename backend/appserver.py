@@ -19,7 +19,7 @@ def load_user(user_id):
     return User(user_id)
 
 appserver.register_blueprint(api, url_prefix='/api')
-appserver.register_blueprint(authentification, url_prefix='/authentification')
+appserver.register_blueprint(authentification, url_prefix='/auth')
 
 
 appserver.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
@@ -27,10 +27,6 @@ appserver.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 @appserver.route('/', defaults={'path': ''})
 @appserver.route('/<path:path>')
 def index(path):
-    return render_template('index.html')
-
-@appserver.route('/sample', methods=['GET', 'POST'])
-def sample():
     return render_template('index.html')
 
 if __name__ == "__main__":

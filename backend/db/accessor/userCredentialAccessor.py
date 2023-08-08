@@ -16,7 +16,6 @@ class userCredentialAccessor:
             cursor.execute('INSERT INTO User VALUES(?, ?, ?)', (userCredential.userName, userCredential.password, userCredential.updateDate))
     
     def checkUserIs(userCredential):
-        print(os.path.join(os.getcwd(), 'app.db'))
         with sqlite3.connect(databaseName) as connection:
             cursor = connection.cursor()
             cursor.execute('SELECT * FROM User WHERE UserName=? ', (userCredential.userName, ))

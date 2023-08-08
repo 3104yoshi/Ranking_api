@@ -7,9 +7,9 @@ from user import User
 from db.data.userCredential import userCredential
 
 
-authentification = Blueprint('authentification', __name__)
+authentification = Blueprint('auth', __name__)
 
-@authentification.route('/Login', methods=['GET', 'POST'])
+@authentification.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('index.html')
@@ -19,9 +19,8 @@ def login():
 
     credential = userCredential(username, password)
     fetchedUser = userCredentialAccessor.getUser(credential)
-    is_authentificated = len(fetchedUser) == 1
 
-    if is_authentificated:
+    if len(fetchedUser) == 1:
         user = User(username)
         flask_login.login_user(user)
         return redirect(url_for('api.hello'))
@@ -29,7 +28,7 @@ def login():
     return render_template('index.html')
 
 
-@authentification.route('/Signup', methods=['GET', 'POST'])
+@authentification.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
         return render_template('index.html')
@@ -40,18 +39,16 @@ def signup():
     credential = userCredential(username, password)
     fetchedUser = userCredentialAccessor.checkUserIs(credential)
     if len(fetchedUser) == 1:
-        return jsonify({'canSignup': False})
+        return redirect(url_for('auth.canSignup', canSignup="既に登録されているユーザー名です"))
 
     userCredentialAccessor.addUser(credential)
 
-    return redirect(url_for('authentification.canSignup', canSignup=True))
+    return redirect(url_for('auth.canSignup', canSignup="登録に成功しました"))
 
 
-@authentification.route('/CanSignup/<canSignup>/', methods=['GET', 'POST'])
+@authentification.route('/canSignup/<canSignup>/', methods=['GET', 'POST'])
 def canSignup(canSignup):
-    if strtobool(canSignup):
-        return render_template('index.html')
-    return redirect(url_for('authentification.signup'))
+    return render_template('index.html', signupStatus=canSignup)
 
 
 @authentification.route('/logout', methods=['GET', 'POST'])

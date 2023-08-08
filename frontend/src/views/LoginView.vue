@@ -1,7 +1,7 @@
 <template>
     <div class="container">
     <h2>Login</h2>
-    <form action="/authentification/Login" method="POST">
+    <form action="login" method="POST">
       <div class="canLogin"></div>
       <label  for="username">Username:</label>
       <input type="text" id="username" name="username" required>
@@ -71,12 +71,6 @@ body {
   #auth-signup {
     background-color: white;
     color: #823df2
-  }
-
-  .canLogin {
-    color: crimson;
-    margin-top: 20px;
-    margin-bottom: 20px;
   }
   
 </style>

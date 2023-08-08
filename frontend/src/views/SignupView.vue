@@ -1,10 +1,7 @@
 <template>
     <div class="container">
     <h2>Signup</h2>
-    <!-- <div>
-      <p v-if="!canSignup">そのユーザーは既に使われています</p>
-    </div> -->
-    <form action="POST">
+    <form action="signup" method="POST">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
 
